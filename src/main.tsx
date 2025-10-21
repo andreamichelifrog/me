@@ -4,7 +4,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
-import { createClient } from '@supabase/supabase-js'
+import { UserProvider } from './lib/UserContext'
 
 
 // Create a new router instance
@@ -19,16 +19,14 @@ declare module '@tanstack/react-router' {
 
 
 
-const supabaseUrl = 'https://hzxyijuarpfbvygrhqqx.supabase.co'
-const supabaseKey = import.meta.env.VITE_SUPABASE_KEY
-const supabase = createClient(supabaseUrl, supabaseKey)
 // Render the app
 const rootElement = document.getElementById('root')!
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
-    <StrictMode>
-      <RouterProvider router={router} />
-    </StrictMode>,
+    <UserProvider>
+        <RouterProvider router={router} />
+    </UserProvider>
+,
   )
 }

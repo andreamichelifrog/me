@@ -1,3 +1,6 @@
+import Emojis from '@/components/emojis'
+import Name from '@/components/name'
+import { useUser } from '@/lib/UserContext'
 import { createFileRoute } from '@tanstack/react-router'
 
 export const Route = createFileRoute('/audience')({
@@ -5,5 +8,15 @@ export const Route = createFileRoute('/audience')({
 })
 
 function RouteComponent() {
-  return <div>Hello "/audience"!</div>
+
+  const { user } = useUser()
+
+  return (
+    <div>
+      <h1>Audience Page</h1>
+      <p>This is the audience page content.</p>
+      {!user && <Name></Name>}
+      {!!user && <Emojis></Emojis>}
+    </div>
+  )
 }
