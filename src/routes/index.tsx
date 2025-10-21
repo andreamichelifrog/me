@@ -1,6 +1,7 @@
 import { createFileRoute } from '@tanstack/react-router'
 import { useEffect } from 'react'
 import { supabase } from '../lib/supabaseClient'
+import EmojiFloatLayer from '@/components/emoji_float_layer'
 
 export const Route = createFileRoute('/')({
   component: Index,
@@ -35,6 +36,7 @@ function Index() {
   return (
     <div className="p-2">
       <h3>Welcome Home!</h3>
+      <EmojiFloatLayer></EmojiFloatLayer>
     </div>
   )
 }
