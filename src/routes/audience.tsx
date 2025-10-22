@@ -12,9 +12,7 @@ function RouteComponent() {
   const { user } = useUser()
 
   return (
-    <div>
-      <h1>Audience Page</h1>
-      <p>This is the audience page content.</p>
+    <div className='p-16'>
       {!user && <Name></Name>}
       {!!user && <Emojis></Emojis>}
     </div>

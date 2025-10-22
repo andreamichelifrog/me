@@ -5,6 +5,7 @@ import { RouterProvider, createRouter } from '@tanstack/react-router'
 // Import the generated route tree
 import { routeTree } from './routeTree.gen'
 import { UserProvider } from './lib/UserContext'
+import { ThemeProvider } from './lib/ThemeContext'
 
 
 // Create a new router instance
@@ -25,8 +26,9 @@ if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement)
   root.render(
     <UserProvider>
+      <ThemeProvider>
         <RouterProvider router={router} />
+      </ThemeProvider>
     </UserProvider>
-,
   )
 }

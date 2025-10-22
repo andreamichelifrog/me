@@ -30,7 +30,7 @@ export default function Name() {
   return (
     <div className="grid w-full max-w-sm items-center gap-3">
       <Label htmlFor="username">
-        Type your username! {username ? '📝' : '😎'}
+        Type your username! {username ? '🫣' : '😎'}
       </Label>
       <Input
         type="text"
