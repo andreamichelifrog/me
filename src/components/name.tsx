@@ -33,7 +33,7 @@ export default function Name() {
         Type your username! {username ? '🫣' : '😎'}
       </p>
       <Input
-        className='h-16 p-4 text-2xl text-sidebar-primary'
+        className='h-16 p-4 text-2xl text-center'
         type="text"
         id="username"
         placeholder="Username"

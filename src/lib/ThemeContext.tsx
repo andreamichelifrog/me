@@ -1,9 +1,16 @@
-import { createContext, useContext, useEffect } from 'react'
+import { createContext, useContext, useEffect, useState } from 'react'
 import { supabase } from './supabaseClient'
 
-const ThemeContext = createContext({})
+interface isDarkContextType {
+  isDark: boolean
+  setIsDark: (isDark:boolean) => void
+}
+
+
+const ThemeContext = createContext<isDarkContextType | undefined>(undefined)
 
 export function ThemeProvider({ children }: { children: React.ReactNode }) {
+    const [isDark, setIsDark] = useState(true);
   useEffect(() => {
     // Set initial dark mode
     document.documentElement.classList.add('dark')
@@ -20,8 +27,10 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
         (payload) => {
           if (payload.new.dark_mode) {
             document.documentElement.classList.add('dark')
+            setIsDark(true)
           } else {
-            document.documentElement.classList.remove('dark')
+              document.documentElement.classList.remove('dark')
+              setIsDark(false)
           }
         }
       )
@@ -32,5 +41,11 @@ export function ThemeProvider({ children }: { children: React.ReactNode }) {
     }
   }, [])
 
-  return <>{children}</>
+  return <ThemeContext.Provider value={{isDark, setIsDark}}>{children}</ThemeContext.Provider>
+}
+
+export function useTheme() {
+  const context = useContext(ThemeContext)
+  if (!context) throw new Error('useTheme must be used within a ThemeProvider')
+  return context
 }

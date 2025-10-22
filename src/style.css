@@ -93,6 +93,8 @@
   --sidebar-border: #E0E0E0;
   --sidebar-ring: #6E7CF6;
   --placeholder: rgba(38,38,38,0.4); /* dimmer placeholder for light */
+  --shadow-outer: rgba(99,99,99,0.2);
+  --shadow-inset: rgba(0,0,0,0.15);
 }
 
 .dark {
@@ -130,6 +132,8 @@
   --sidebar-border: rgba(82,82,82,0.1);
   --sidebar-ring: #6E7CF6;
   --placeholder: rgba(244,244,244,0.45); /* dimmer placeholder for dark */
+  --shadow-outer: rgba(0,0,0,0.45);
+  --shadow-inset: rgba(0,0,0,0.25);
 }
 
 @layer base {
@@ -139,5 +143,30 @@
   body {
     @apply bg-background text-foreground;
     font-family: var(--font-sans);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
   }
 }
+
+.btn-3d {
+  /* adopt the provided 3D button look but use theme variables */
+  border: 0;
+  transition: all 150ms ease-in-out;
+  color: var(--foreground);
+  background: var(--sidebar); /* use theme background as requested */
+  box-shadow: var(--shadow-outer) 0 2px 8px 0, inset 0px -6px 0px var(--shadow-inset), inset 0px -2px 0px rgba(0, 0, 0, 0.15);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.btn-3d:hover {
+  filter: brightness(0.98);
+}
+.btn-3d:active {
+  scale: 0.95;
+  filter: brightness(0.97);
+  padding-top: 15px;
+  padding-bottom: 15px;
+  box-shadow: var(--shadow-outer) 0 2px 6px 0, inset 0px -1px 0px var(--shadow-inset);
+}
+
