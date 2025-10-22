@@ -33,9 +33,10 @@ export default function Emojis() {
     }
 
   return (
-    <div className='flex flex-row flex-wrap'>
+    <div className='w-64 mx-auto grid grid-cols-3 gap-4 place-items-center'>
         {icons.map((icon, index) => (
-            <Button key={index} variant="outline" size="icon" aria-label="Submit" onClick={()=>sendEmoji(icon, user!.id)}>
+            <Button className="rounded-3xl w-20 h-20 text-3xl md:w-24 md:h-24 p-2"
+                size="icon-lg" key={index} variant="outline" aria-label="Submit" onClick={()=>sendEmoji(icon, user!.id)}>
                 {icon}
             </Button>
         ))}

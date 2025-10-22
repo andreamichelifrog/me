@@ -28,11 +28,12 @@ export default function Name() {
   }
 
   return (
-    <div className="grid w-full max-w-sm items-center gap-3">
-      <Label htmlFor="username">
+    <div className="flex flex-col w-64 items-center justify-center gap-3">
+      <p className='text-xl text-center'>
         Type your username! {username ? '🫣' : '😎'}
-      </Label>
+      </p>
       <Input
+        className='h-16 p-4 text-2xl text-sidebar-primary'
         type="text"
         id="username"
         placeholder="Username"
@@ -41,10 +42,11 @@ export default function Name() {
         disabled={loading}
       />
       <Button
+        className="h-12 w-fit px-8 text-lg mt-8"
         onClick={handleSave}
         disabled={!username || loading}
       >
-        {loading ? 'Saving...' : 'Save Username'}
+        {loading ? 'Saving...' : 'Next'}
       </Button>
       {error && <div className="text-red-500 text-sm">{error}</div>}
     </div>

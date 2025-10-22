@@ -12,7 +12,7 @@ function RouteComponent() {
   const { user } = useUser()
 
   return (
-    <div className='p-16'>
+    <div className='p-8 h-screen flex flex-col justify-center items-center gap-8'>
       {!user && <Name></Name>}
       {!!user && <Emojis></Emojis>}
     </div>
