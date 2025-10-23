@@ -1,9 +1,14 @@
 import { useEffect, useRef } from 'react'
+import { useDrawing } from '@/lib/useDrawing'
+import { useUser } from '@/lib/UserContext'
 
 export default function Canvas() {
   const canvasRef = useRef<HTMLCanvasElement | null>(null)
   const drawing = useRef(false)
   const lastPoint = useRef<{ x: number; y: number } | null>(null)
+  const { start, push, finishAndSend } = useDrawing({ ttlSeconds: 4 })
+  const { user } = useUser()
+  const sentRef = useRef(false)
 
   useEffect(() => {
     const canvas = canvasRef.current
@@ -45,12 +50,15 @@ export default function Canvas() {
 
     function pointerDown(e: PointerEvent) {
       drawing.current = true
+      sentRef.current = false
+      start()
       // cancel any ongoing fade and clear previous drawing
       const dpr = window.devicePixelRatio || 1
       canvasEl.style.transition = 'none'
       canvasEl.style.opacity = '1'
       ctx2.clearRect(0, 0, canvasEl.width / dpr, canvasEl.height / dpr)
       const p = toCanvasPoint(e.clientX, e.clientY)
+      push(p)
       lastPoint.current = p
       // start a tiny stroke so tap shows
       ctx2.beginPath()
@@ -62,6 +70,7 @@ export default function Canvas() {
     function pointerMove(e: PointerEvent) {
       if (!drawing.current) return
       const p = toCanvasPoint(e.clientX, e.clientY)
+      push(p)
       if (!lastPoint.current) lastPoint.current = p
       ctx2.beginPath()
       ctx2.moveTo(lastPoint.current.x, lastPoint.current.y)
@@ -73,6 +82,10 @@ export default function Canvas() {
     function pointerUp() {
       drawing.current = false
       lastPoint.current = null
+      if (sentRef.current) return
+      sentRef.current = true
+      // send compact drawing to server
+      finishAndSend(user?.id)
       // fade the canvas out, then clear and reset opacity
       const dpr = window.devicePixelRatio || 1
       // ensure transition applies
@@ -110,6 +123,7 @@ export default function Canvas() {
       pointerMove({ clientX: t.clientX, clientY: t.clientY } as PointerEvent)
     }
     function touchEnd() {
+      // touchend may fire in addition to pointerup on some browsers; reuse the same handler
       pointerUp()
     }
   canvasEl.addEventListener('touchstart', touchStart, { passive: false })
