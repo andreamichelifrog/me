@@ -1,3 +1,4 @@
+import Canvas from '@/components/canvas'
 import DarkMode from '@/components/dark_mode'
 import Emojis from '@/components/emojis'
 import Name from '@/components/name'
@@ -20,6 +21,7 @@ function RouteComponent() {
       <React.Fragment>
         <DarkMode></DarkMode>
         <Emojis></Emojis>
+        <Canvas></Canvas>
       </React.Fragment>}
     </div>
   )

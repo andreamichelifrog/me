@@ -169,4 +169,11 @@
   padding-bottom: 15px;
   box-shadow: var(--shadow-outer) 0 2px 6px 0, inset 0px -1px 0px var(--shadow-inset);
 }
-
+.canvas-3d{
+  border: 0;
+  /* color: var(--foreground); */
+  background: var(--sidebar); /* use theme background as requested */
+  box-shadow: var(--shadow-inset) 0px 30px 60px -12px inset, var(--shadow-outer) 0px 18px 36px -18px inset , rgba(0, 0, 0, 0.08) 0px 4px 12px;
+  align-items: center;
+  gap: 0.5rem;
+}
