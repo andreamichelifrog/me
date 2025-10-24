@@ -23,6 +23,7 @@ if (!rootElement.innerHTML) {
   root.render(
     <UserProvider>
       <ThemeProvider>
+        test
         <RouterProvider router={router} />
       </ThemeProvider>
     </UserProvider>
