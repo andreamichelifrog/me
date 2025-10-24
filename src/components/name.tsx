@@ -1,44 +1,43 @@
-import React, { useState } from 'react'
-import { Input } from './ui/input'
-import { Label } from '@radix-ui/react-label'
-import { supabase } from '../lib/supabaseClient'
-import { useUser } from '@/lib/UserContext'
-import { Button } from './ui/button'
+import { useState } from "react";
+import { Input } from "./ui/input";
+import { supabase } from "../lib/supabaseClient";
+import { useUser } from "@/lib/UserContext";
+import { Button } from "./ui/button";
 
 export default function Name() {
-  const [username, setUsername] = useState('')
-  const [loading, setLoading] = useState(false)
-  const [error, setError] = useState('')
-  const { setUser } = useUser()
+  const [username, setUsername] = useState("");
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const { setUser } = useUser();
 
   async function handleSave() {
-    setLoading(true)
-    setError('')
+    setLoading(true);
+    setError("");
     const { data, error } = await supabase
-      .from('username')
+      .from("username")
       .insert([{ username: username }])
-      .select()
-    setLoading(false)
+      .select();
+    setLoading(false);
     if (error) {
-      setError(error.message)
+      setError(error.message);
     } else if (data && data.length > 0) {
-      setUser(data[0])
-      setUsername('')
+      setUser(data[0]);
+      setUsername("");
     }
   }
 
   return (
     <div className="flex flex-col w-64 items-center justify-center gap-3">
-      <p className='text-xl text-center'>
-        Type your username! {username ? '🫣' : '😎'}
+      <p className="text-xl text-center">
+        Type your username! {username ? "🫣" : "😎"}
       </p>
       <Input
-        className='h-16 p-4 text-2xl text-center'
+        className="h-16 p-4 text-2xl text-center"
         type="text"
         id="username"
         placeholder="Username"
         value={username}
-        onChange={e => setUsername(e.target.value)}
+        onChange={(e) => setUsername(e.target.value)}
         disabled={loading}
       />
       <Button
@@ -46,10 +45,9 @@ export default function Name() {
         onClick={handleSave}
         disabled={!username || loading}
       >
-        {loading ? 'Saving...' : 'Next'}
+        {loading ? "Saving..." : "Next"}
       </Button>
       {error && <div className="text-red-500 text-sm">{error}</div>}
     </div>
-  )
+  );
 }
-
