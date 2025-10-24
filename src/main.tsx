@@ -17,7 +17,7 @@ const memoryHistory = createMemoryHistory({
 // Create a new router instance
 const router = createRouter({
   routeTree,
-  basepath: "https://andreamichelifrog.github.io/me",
+  basepath: "/me",
   history: memoryHistory,
 });
 
@@ -32,7 +32,6 @@ declare module "@tanstack/react-router" {
 const rootElement = document.getElementById("root")!;
 if (!rootElement.innerHTML) {
   const root = ReactDOM.createRoot(rootElement);
-  console.log(router);
 
   root.render(
     <UserProvider>
