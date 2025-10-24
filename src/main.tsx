@@ -1,15 +1,24 @@
 import ReactDOM from "react-dom/client";
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import {
+  RouterProvider,
+  createMemoryHistory,
+  createRouter,
+} from "@tanstack/react-router";
 
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen";
 import { UserProvider } from "./lib/UserContext";
 import { ThemeProvider } from "./lib/ThemeContext";
 
+const memoryHistory = createMemoryHistory({
+  initialEntries: ["/"],
+});
+
 // Create a new router instance
 const router = createRouter({
   routeTree,
   basepath: "https://andreamichelifrog.github.io/me",
+  history: memoryHistory,
 });
 
 // Register the router instance for type safety
