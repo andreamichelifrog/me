@@ -19,10 +19,10 @@ export default defineConfig({
       },
     }),
   ],
+  base: '/me/',
   resolve: {
     alias: {
       "@": path.resolve(__dirname, "./src"),
     },
-  },
-  base: '/me/'
+  }
 })
