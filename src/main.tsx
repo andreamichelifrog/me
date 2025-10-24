@@ -7,7 +7,10 @@ import { UserProvider } from "./lib/UserContext";
 import { ThemeProvider } from "./lib/ThemeContext";
 
 // Create a new router instance
-const router = createRouter({ routeTree });
+const router = createRouter({
+  routeTree,
+  basepath: "https://andreamichelifrog.github.io/me",
+});
 
 // Register the router instance for type safety
 declare module "@tanstack/react-router" {
@@ -23,7 +26,6 @@ if (!rootElement.innerHTML) {
   root.render(
     <UserProvider>
       <ThemeProvider>
-        test
         <RouterProvider router={router} />
       </ThemeProvider>
     </UserProvider>
