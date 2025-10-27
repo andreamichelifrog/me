@@ -148,6 +148,10 @@
   }
 }
 
+.h-dynamic {
+  height: 100dvh;
+}
+
 .btn-3d {
   /* adopt the provided 3D button look but use theme variables */
   border: 0;
